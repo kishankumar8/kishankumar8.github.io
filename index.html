@@ -1,0 +1,350 @@
+<title>Kishan Kumar Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single-column studio page, wide hero with a "detection box" motif, sections on a 12-col grid that collapses to one column on phones */
+:root {
+  --bg: #EDF0EE;
+  --surface: #F8FAF9;
+  --ink: #101A17;
+  --muted: #526059;
+  --line: #CBD4CF;
+  --accent: #C2410C;
+  --accent-ink: #FFFFFF;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1513; --surface: #151E1B; --ink: #E6EEEA; --muted: #93A39B;
+    --line: #27332E; --accent: #FF8A5B; --accent-ink: #14100D; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1513; --surface: #151E1B; --ink: #E6EEEA; --muted: #93A39B;
+  --line: #27332E; --accent: #FF8A5B; --accent-ink: #14100D; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.65;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1060px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; line-height: 1.08; margin: 0; letter-spacing: -0.02em; }
+.label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+/* nav */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px; }
+.brand { font-family: var(--font-display); font-weight: 800; font-size: 18px; text-decoration: none; letter-spacing: -0.02em; }
+.brand span { color: var(--accent); }
+.links { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; }
+.links a { font-size: 14px; text-decoration: none; padding: 6px 10px; border-radius: 6px; color: var(--muted); }
+.links a:hover, .links a.on { color: var(--ink); background: var(--surface); }
+.theme { font-family: var(--font-mono); font-size: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 6px; padding: 6px 10px; cursor: pointer; }
+@media (max-width: 640px) { .links a.opt { display: none; } }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 1.25fr 1fr; gap: 40px; align-items: center; padding-block: 64px 56px; }
+.hero > * { min-width: 0; }
+.hero h1 { font-size: clamp(40px, 7vw, 76px); font-weight: 800; margin-block: 14px 18px; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero p.lede { font-size: 18px; color: var(--muted); max-width: 52ch; margin: 0 0 28px; }
+.cta { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; text-decoration: none; padding: 11px 18px; border-radius: 8px; border: 1px solid var(--ink); cursor: pointer; font-family: var(--font-body); background: transparent; color: var(--ink); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn:hover { transform: translateY(-1px); }
+.status { display: inline-flex; align-items: center; gap: 8px; }
+.status i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; }
+
+.scan { position: relative; aspect-ratio: 1 / 1; max-width: 420px; width: 100%; margin-inline: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.scan svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.scan .grid-line { stroke: var(--line); stroke-width: 1; }
+.scan .face { fill: none; stroke: var(--ink); stroke-width: 2; }
+.scan .box { fill: none; stroke: var(--accent); stroke-width: 3; }
+.scan .beam { position: absolute; left: 0; right: 0; height: 2px; background: var(--accent); opacity: .7; top: 12%; animation: sweep 3.6s ease-in-out infinite alternate; }
+.scan .tag { position: absolute; left: 12%; top: 8%; font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; background: var(--accent); color: var(--accent-ink); padding: 2px 8px; border-radius: 3px; }
+.scan .foot { position: absolute; left: 14px; bottom: 12px; right: 14px; display: flex; justify-content: space-between; gap: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+@keyframes sweep { from { top: 18%; } to { top: 82%; } }
+@media (prefers-reduced-motion: reduce) { .scan .beam { animation: none; top: 50%; } html { scroll-behavior: auto; } .btn:hover { transform: none; } }
+@media (max-width: 820px) { .hero { grid-template-columns: 1fr; padding-block: 40px; gap: 32px; } }
+
+/* sections */
+section { padding-block: 56px; border-top: 1px solid var(--line); }
+.sec { display: grid; grid-template-columns: 200px 1fr; gap: 32px; }
+.sec > * { min-width: 0; }
+.sec h2 { font-size: clamp(26px, 3.4vw, 36px); font-weight: 700; }
+@media (max-width: 820px) { .sec { grid-template-columns: 1fr; gap: 20px; } }
+.about p { margin: 0 0 14px; max-width: 64ch; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 24px; }
+.fact { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+.fact b { display: block; font-family: var(--font-display); font-size: 24px; font-weight: 700; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.fact span { font-size: 13px; color: var(--muted); }
+
+/* skills */
+.skillgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+.skillbox { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 18px; }
+.skillbox h3 { font-size: 17px; margin-bottom: 12px; font-weight: 700; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-family: var(--font-mono); font-size: 12.5px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); }
+.chip.hot { border-color: var(--accent); color: var(--accent); }
+
+/* projects */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.filters button { font-family: var(--font-mono); font-size: 12.5px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 720px) { .projects { grid-template-columns: 1fr; } }
+.proj { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px; display: flex; flex-direction: column; gap: 12px; }
+.proj.feature { grid-column: 1 / -1; border-color: var(--accent); }
+.proj h3 { font-size: 22px; font-weight: 700; }
+.proj p { margin: 0; color: var(--muted); }
+.proj ul { margin: 0; padding-left: 18px; color: var(--muted); }
+.proj li { margin-bottom: 4px; }
+.proj .meta { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.proj .badge { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.proj a.more { margin-top: auto; font-weight: 600; font-size: 14px; color: var(--ink); text-decoration-color: var(--accent); text-underline-offset: 4px; }
+.proj[hidden] { display: none !important; }
+
+/* timeline */
+.tl { display: grid; gap: 0; }
+.tl .row { display: grid; grid-template-columns: 1fr; gap: 4px; padding-block: 18px; border-bottom: 1px solid var(--line); }
+.tl .row:first-child { padding-top: 0; }
+.tl .row:last-child { border-bottom: 0; padding-bottom: 0; }
+.tl h3 { font-size: 20px; font-weight: 700; }
+.tl p { margin: 0; color: var(--muted); max-width: 64ch; }
+
+/* contact */
+.contact h2.big { font-size: clamp(32px, 5vw, 56px); font-weight: 800; margin-bottom: 16px; }
+.contact p { color: var(--muted); max-width: 52ch; margin: 0 0 24px; }
+.mail { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 20px; }
+.mail code { font-family: var(--font-mono); font-size: 15px; background: var(--surface); border: 1px solid var(--line); padding: 9px 14px; border-radius: 8px; overflow-wrap: anywhere; user-select: all; }
+footer { border-top: 1px solid var(--line); padding-block: 24px 40px; font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+</style>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">kishan<span>.</span>kumar</a>
+    <nav class="links" aria-label="Sections">
+      <a href="#about" class="opt">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience" class="opt">Experience</a>
+      <a href="#contact">Contact</a>
+      <button class="theme" id="themeBtn" type="button" aria-label="Switch colour theme">theme</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+  <div class="hero">
+    <div>
+      <span class="label status"><i></i> Open to ML / Data Science internships</span>
+      <h1>Kishan Kumar builds models that <em>tell real from fake</em>.</h1>
+      <p class="lede">B.Tech student in Artificial Intelligence &amp; Data Science. I train machine learning and deep learning models, then ship them as working front-ends.</p>
+      <div class="cta">
+        <a class="btn primary" href="#projects">See my projects</a>
+        <a class="btn" href="https://github.com/kishankumar8" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/kishan-kumar-2b7240324" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <div class="scan" role="img" aria-label="Illustration of a face inside a detection box, like the input to a deepfake detector">
+      <svg viewBox="0 0 400 400" aria-hidden="true">
+        <g class="grid-line">
+          <line x1="0" y1="100" x2="400" y2="100"/><line x1="0" y1="200" x2="400" y2="200"/><line x1="0" y1="300" x2="400" y2="300"/>
+          <line x1="100" y1="0" x2="100" y2="400"/><line x1="200" y1="0" x2="200" y2="400"/><line x1="300" y1="0" x2="300" y2="400"/>
+        </g>
+        <ellipse class="face" cx="200" cy="205" rx="82" ry="102"/>
+        <path class="face" d="M158 185 q14 -12 28 0 M214 185 q14 -12 28 0 M200 200 v34 q-10 6 -2 8 M166 262 q34 26 68 0"/>
+        <path class="box" d="M96 78 h-0 M96 78 H132 M96 78 V114 M304 78 H268 M304 78 V114 M96 332 H132 M96 332 V296 M304 332 H268 M304 332 V296"/>
+      </svg>
+      <div class="beam"></div>
+      <div class="tag">FACE · ANALYSING</div>
+      <div class="foot"><span>input: image / video frame</span><span>output: real | fake</span></div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="sec about">
+      <div><span class="label">About</span><h2 style="margin-top:8px">Who I am</h2></div>
+      <div>
+        <p>I am a B.Tech student at Bikaner Technical University, majoring in AI &amp; Data Science. I like taking a problem from raw data to a trained model and then to something a person can open in a browser.</p>
+        <p>My recent work is a deepfake detection model. Before that I built regression models for house prices and hotel revenue, and a job recommendation system. I am comfortable across the stack, from data pipelines and model building to front-end delivery.</p>
+        <div class="facts">
+          <div class="fact"><b>8.23</b><span>CGPA, B.Tech AI &amp; DS</span></div>
+          <div class="fact"><b>4</b><span>ML / DL projects built</span></div>
+          <div class="fact"><b>2</b><span>internships</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec">
+      <div><span class="label">Skills</span><h2 style="margin-top:8px">What I work with</h2></div>
+      <div class="skillgrid">
+        <div class="skillbox">
+          <h3>Machine learning</h3>
+          <div class="chips"><span class="chip hot">Machine Learning</span><span class="chip hot">scikit-learn</span><span class="chip">Regression</span><span class="chip">Recommendation</span><span class="chip">Feature engineering</span></div>
+        </div>
+        <div class="skillbox">
+          <h3>Deep learning</h3>
+          <div class="chips"><span class="chip hot">Deep Learning</span><span class="chip hot">CNN</span><span class="chip hot">ANN</span><span class="chip">Image classification</span></div>
+        </div>
+        <div class="skillbox">
+          <h3>Data and analytics</h3>
+          <div class="chips"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">Pandas</span><span class="chip">Database</span><span class="chip">Power BI</span><span class="chip">Excel</span></div>
+        </div>
+        <div class="skillbox">
+          <h3>Web</h3>
+          <div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">Full-stack basics</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sec">
+      <div><span class="label">Projects</span><h2 style="margin-top:8px">Selected work</h2></div>
+      <div>
+        <div class="filters" role="group" aria-label="Filter projects">
+          <button type="button" data-f="all" aria-pressed="true">All</button>
+          <button type="button" data-f="dl" aria-pressed="false">Deep learning</button>
+          <button type="button" data-f="ml" aria-pressed="false">Machine learning</button>
+        </div>
+        <div class="projects" id="projList">
+          <article class="proj feature" data-t="dl ml">
+            <div class="meta"><span class="badge">Latest project</span><span class="label">Deep learning</span></div>
+            <h3>Deepfake Detection Model</h3>
+            <p>A deep learning model that looks at a face image and decides whether it is genuine or manipulated.</p>
+            <div class="chips"><span class="chip">Python</span><span class="chip">Deep Learning</span><span class="chip">CNN</span><span class="chip">Image classification</span></div>
+            <a class="more" href="https://github.com/kishankumar8" target="_blank" rel="noopener">View on GitHub</a>
+          </article>
+          <article class="proj" data-t="ml">
+            <div class="meta"><span class="label">Machine learning</span></div>
+            <h3>House Price Prediction</h3>
+            <ul><li>Regression model that predicts price from location, size and amenities.</li><li>Data cleaning, feature engineering and model evaluation.</li></ul>
+            <div class="chips"><span class="chip">Python</span><span class="chip">scikit-learn</span></div>
+            <a class="more" href="https://github.com/kishankumar8" target="_blank" rel="noopener">View on GitHub</a>
+          </article>
+          <article class="proj" data-t="ml">
+            <div class="meta"><span class="label">Machine learning</span></div>
+            <h3>Hotel Revenue Prediction</h3>
+            <ul><li>Estimates revenue from historical booking and occupancy data.</li><li>Regression techniques to find the main revenue drivers.</li></ul>
+            <div class="chips"><span class="chip">Python</span><span class="chip">Pandas</span></div>
+            <a class="more" href="https://github.com/kishankumar8" target="_blank" rel="noopener">View on GitHub</a>
+          </article>
+          <article class="proj" data-t="ml">
+            <div class="meta"><span class="label">Machine learning</span></div>
+            <h3>Job Recommendation System</h3>
+            <ul><li>Suggests relevant jobs from a user's profile and preferences.</li><li>Similarity-based and ML techniques to rank job listings.</li></ul>
+            <div class="chips"><span class="chip">Python</span><span class="chip">Similarity</span></div>
+            <a class="more" href="https://github.com/kishankumar8" target="_blank" rel="noopener">View on GitHub</a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec">
+      <div><span class="label">Experience</span><h2 style="margin-top:8px">Internships &amp; education</h2></div>
+      <div class="tl">
+        <div class="row"><h3>InAmigos Foundation</h3><span class="label">Internship</span><p>Working on an AI/ML learning guide and a data analysis notebook on accident data.</p></div>
+        <div class="row"><h3>Incode Vision</h3><span class="label">Internship</span><p>Hands-on work applying data and ML skills to real tasks.</p></div>
+        <div class="row"><h3>B.Tech, Artificial Intelligence &amp; Data Science</h3><span class="label">Bikaner Technical University · CGPA 8.23</span><p>Coursework and personal projects in machine learning, deep learning and data analysis.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2 class="big">Let's work together.</h2>
+    <p>I am looking for a Machine Learning or Data Science internship. Send me a message and I will reply soon.</p>
+    <div class="mail">
+      <code id="mailText">kishankumarthakur02@gmail.com</code>
+      <button class="btn primary" id="copyBtn" type="button">Copy email</button>
+    </div>
+    <div class="cta">
+      <a class="btn" href="https://github.com/kishankumar8" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/kishan-kumar-2b7240324" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer><span>© 2026 Kishan Kumar</span><span>Rajasthan, India</span></footer>
+</main>
+
+<script>
+(function () {
+  // theme toggle (light / dark), remembered per browser
+  var root = document.documentElement, btn = document.getElementById('themeBtn');
+  function isDark() {
+    var t = root.getAttribute('data-theme');
+    if (t) return t === 'dark';
+    return window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  try { var saved = localStorage.getItem('kk-theme'); if (saved) root.setAttribute('data-theme', saved); } catch (e) {}
+  function label() { btn.textContent = isDark() ? 'light' : 'dark'; }
+  label();
+  btn.addEventListener('click', function () {
+    var next = isDark() ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('kk-theme', next); } catch (e) {}
+    label();
+  });
+
+  // project filters
+  var fbtns = document.querySelectorAll('.filters button');
+  var cards = document.querySelectorAll('#projList .proj');
+  fbtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.getAttribute('data-f');
+      fbtns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      cards.forEach(function (c) {
+        var show = f === 'all' || c.getAttribute('data-t').split(' ').indexOf(f) > -1;
+        c.hidden = !show;
+      });
+    });
+  });
+
+  // copy email
+  var copy = document.getElementById('copyBtn'), mail = document.getElementById('mailText');
+  copy.addEventListener('click', function () {
+    var done = function () { copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy email'; }, 1800); };
+    var fallback = function () {
+      var r = document.createRange(); r.selectNodeContents(mail);
+      var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      copy.textContent = 'Press Ctrl+C';
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(mail.textContent).then(done, fallback);
+    } else { fallback(); }
+  });
+
+  // highlight current section in nav
+  var links = document.querySelectorAll('.links a');
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting && map[e.target.id]) {
+          links.forEach(function (l) { l.classList.remove('on'); });
+          map[e.target.id].classList.add('on');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    Object.keys(map).forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
+  }
+})();
+</script>
